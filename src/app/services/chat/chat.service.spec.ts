@@ -1,19 +1,64 @@
-import { HttpClientModule } from '@angular/common/http';
+import {
+  HttpClientTestingModule,
+  HttpTestingController,
+} from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { environment } from 'src/environments/environment';
 
-import { ChatService } from './chat.service';
+import { ChatMessage, ChatService } from './chat.service';
 
 describe('ChatService', () => {
-  let service: ChatService;
+  let chatService: ChatService;
+  let httpMock: HttpTestingController;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientModule],
+      imports: [HttpClientTestingModule],
     });
-    service = TestBed.inject(ChatService);
+
+    httpMock = TestBed.inject(HttpTestingController);
+    chatService = TestBed.inject(ChatService);
   });
 
   it('should be created', () => {
-    expect(service).toBeTruthy();
+    expect(chatService).toBeTruthy();
+  });
+
+  it('should get welcome messages', () => {
+    const welcomeMessages: ChatMessage[] = [
+      {
+        text: "Hi, I'm a bot",
+        type: 'text',
+      },
+      {
+        text: 'I will echo back your messages',
+        type: 'text',
+      },
+    ];
+
+    chatService.fetchWelcomeMessage().subscribe((messages) => {
+      expect(messages).toEqual(welcomeMessages);
+    });
+
+    const req = httpMock.expectOne(
+      `${environment.serverUrl}/getWelcomeMessage`
+    );
+
+    req.flush({ response: welcomeMessages });
+  });
+
+  it('should send a message and receive the answer', () => {
+    const message: ChatMessage = {
+      text: 'Hello!',
+      type: 'text',
+    };
+
+    chatService.sendMessage(message).subscribe((answer) => {
+      expect(answer[0]).toEqual(message);
+    });
+
+    const req = httpMock.expectOne(`${environment.serverUrl}/sendMessage`);
+
+    req.flush({ response: [message] });
   });
 });

@@ -1,5 +1,7 @@
 import { HttpClientModule } from '@angular/common/http';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { LoginComponent } from './login.component';
@@ -13,7 +15,7 @@ describe('LoginComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [LoginComponent],
-      imports: [HttpClientModule],
+      imports: [HttpClientTestingModule, ReactiveFormsModule],
       providers: [{ provide: Router, useValue: routerMock }],
     }).compileComponents();
   }));

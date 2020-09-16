@@ -1,4 +1,5 @@
 import { HttpClientModule } from '@angular/common/http';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth/auth.service';
@@ -15,7 +16,7 @@ describe('GuestGuard', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [GuestGuard, { provide: Router, useValue: routerMock }],
-      imports: [HttpClientModule],
+      imports: [HttpClientTestingModule],
     });
     authService = TestBed.inject(AuthService);
     guard = TestBed.inject(GuestGuard);

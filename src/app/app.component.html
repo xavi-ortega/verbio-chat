@@ -1,3 +1,7 @@
-<h1>Verbio Chat</h1>
+<header *ngIf="hasAuth">
+  <h1>Verbio Chat</h1>
 
-<router-outlet></router-outlet>
+  <button type="button" (click)="logout()">Logout</button>
+</header>
+
+<router-outlet (activate)="checkAuth()"></router-outlet>

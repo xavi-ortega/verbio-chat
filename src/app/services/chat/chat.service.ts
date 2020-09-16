@@ -10,7 +10,9 @@ const POST_MESSAGE_URL = 'sendMessage';
 
 export interface ChatMessage {
   text: string;
-  own: boolean;
+  type: string;
+  url?: string;
+  own?: boolean;
 }
 
 @Injectable({

@@ -1,1 +1,19 @@
-<p>chat works!</p>
+<h1>Chat</h1>
+
+<ul *ngIf="messages$ | async as messages">
+  <li *ngFor="let message of messages">
+    <span *ngIf="message.type === 'text'">{{ message.text }}</span>
+    <img *ngIf="message.type === 'image'" [src]="message.url" alt="Cute Cat" />
+  </li>
+</ul>
+
+<form [formGroup]="messageForm" (submit)="sendMessage()">
+  <input
+    id="message"
+    placeholder="Type here..."
+    type="text"
+    formControlName="message"
+  />
+
+  <input type="submit" value="Send" />
+</form>
