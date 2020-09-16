@@ -26,7 +26,7 @@ describe('AuthGuard', () => {
     expect(guard).toBeTruthy();
   });
 
-  it('should redirect an unauthenticated user to the login route', () => {
+  it('should redirect an unauthenticated user to the login page', () => {
     expect(guard.canActivate(routeMock, routeStateMock)).toEqual(false);
     expect(routerMock.navigate).toHaveBeenCalledWith(['/login']);
   });

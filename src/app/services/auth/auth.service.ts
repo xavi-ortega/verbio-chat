@@ -15,7 +15,7 @@ const AUTH_STORAGE_KEY = 'verbio-chat/auth';
 export class AuthService {
   constructor(
     private http: HttpClient,
-    private httpCommonService: HttpCommonService
+    private httpCommon: HttpCommonService
   ) {}
 
   private loggedIn$: BehaviorSubject<boolean> = new BehaviorSubject(false);
@@ -40,7 +40,7 @@ export class AuthService {
   login(params): Observable<boolean> {
     return this.http
       .post<{ session_id: string }>(
-        `${environment.serverUrl}/${{ LOGIN_URL }}`,
+        `${environment.serverUrl}/${LOGIN_URL}`,
         params
       )
       .pipe(
@@ -57,11 +57,15 @@ export class AuthService {
   }
 
   logout(): Observable<boolean> {
-    return of(false);
+    localStorage.removeItem(AUTH_STORAGE_KEY);
+
+    this.loggedIn$.next(false);
+
+    return of(true);
   }
 
   private setAuth(token: string) {
-    this.httpCommonService.setHeaders(
+    this.httpCommon.setHeaders(
       new HttpHeaders({
         'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`,
