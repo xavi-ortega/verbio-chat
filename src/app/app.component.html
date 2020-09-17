@@ -1,7 +1,13 @@
 <header *ngIf="hasAuth">
-  <h1>Verbio Chat</h1>
+  <img
+    class="logo"
+    src="https://www.verbio.com/wp-content/themes/verbio-theme/dist/images/logo_white.svg"
+    alt="Verbio Technologies"
+  />
 
-  <button type="button" (click)="logout()">Logout</button>
+  <button class="logout" type="button" (click)="logout()">
+    <img src="assets/cerrar-sesion.svg" alt="Logout" />
+  </button>
 </header>
 
 <router-outlet (activate)="checkAuth()"></router-outlet>

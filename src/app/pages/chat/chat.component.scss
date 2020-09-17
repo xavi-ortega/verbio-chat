@@ -1,6 +1,5 @@
 $primary: #ff1f58;
 $secondary: #0cddb8;
-$background-color: #333333;
 $bot-output-delay: 500ms;
 
 @import url("https://fonts.googleapis.com/css?family=Montserrat|Roboto");
@@ -11,50 +10,28 @@ $bot-output-delay: 500ms;
   box-sizing: border-box;
 }
 
-body {
-  overflow-x: hidden;
-  font-family: "Roboto", sans-serif;
+.chatbot__overview {
+  box-shadow: inset 0px 0px 15px 5px rgba(255, 255, 255, 0.1);
+  border-radius: 25px;
+  font-family: "Sailec-Medium", sans-serif;
   font-weight: 400;
   font-size: 16px;
   font-size: 1em;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-
   line-height: 1.45;
-  background-color: $background-color;
-}
-
-ol,
-ul {
-  list-style: none;
-}
-blockquote,
-q {
-  quotes: none;
-}
-blockquote:before,
-blockquote:after,
-q:before,
-q:after {
-  content: "";
-  content: none;
-}
-
-.chatbot__overview {
-  background-color: $background-color;
 
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 
-  width: 600px;
-  height: 60vh;
-  margin: 0 auto;
+  width: 60vh;
+  height: 75vh;
+  margin: 3rem auto 0 auto;
 
-  padding: 1em;
+  padding: 3em;
 }
 
 .chatlist {
+  list-style: none;
   font-family: inherit;
   font-size: 1em;
 
@@ -154,6 +131,7 @@ q:after {
   bottom: 0;
   height: auto;
   width: 100%;
+  margin-top: 2rem;
 }
 
 input {
@@ -191,6 +169,7 @@ input[type="submit"] {
   border: 2px solid $primary;
   border-left: 0;
   border-radius: 0 8px 8px 0;
+  text-transform: capitalize;
 
   transition: 200ms all ease-in;
 
@@ -206,12 +185,6 @@ input[type="submit"] {
   color: #fff;
 }
 
-:-moz-placeholder {
-  /* Mozilla Firefox 4 to 18 */
-  color: #fff;
-  opacity: 1;
-}
-
 ::-moz-placeholder {
   /* Mozilla Firefox 19+ */
   color: #fff;
@@ -220,7 +193,6 @@ input[type="submit"] {
 
 ::-webkit-scrollbar {
   width: 0.65em; /* for vertical scrollbars */
-  height: 0.65em; /* for horizontal scrollbars */
 }
 
 ::-webkit-scrollbar-track {
@@ -229,4 +201,37 @@ input[type="submit"] {
 
 ::-webkit-scrollbar-thumb {
   background: rgba(0, 0, 0, 0.3);
+}
+
+.typing-indicator {
+  background: transparent;
+  will-change: transform;
+  width: auto;
+  border-radius: 50px;
+  padding: 15px;
+  display: table;
+  margin: 0 auto;
+  position: relative;
+
+  span {
+    height: 10px;
+    width: 10px;
+    float: left;
+    margin: 0 1px;
+    background-color: #9e9ea1;
+    display: block;
+    border-radius: 50%;
+    opacity: 0.4;
+    @for $i from 1 through 3 {
+      &:nth-of-type(#{$i}) {
+        animation: 1s blink infinite ($i * 0.3333s);
+      }
+    }
+  }
+}
+
+@keyframes blink {
+  50% {
+    opacity: 1;
+  }
 }

@@ -1,7 +1,14 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { BehaviorSubject, from, interval, Observable, zip } from 'rxjs';
-import { delay, first, mergeMap, timeInterval } from 'rxjs/operators';
+import {
+  delay,
+  finalize,
+  first,
+  mergeMap,
+  tap,
+  timeInterval,
+} from 'rxjs/operators';
 import { ChatMessage, ChatService } from 'src/app/services/chat/chat.service';
 
 @Component({
@@ -18,6 +25,8 @@ export class ChatComponent implements OnInit {
     ChatMessage[]
   >([]);
 
+  botIsTyping: boolean;
+
   constructor(private chatService: ChatService) {}
 
   ngOnInit(): void {
@@ -29,7 +38,9 @@ export class ChatComponent implements OnInit {
       .fetchWelcomeMessage()
       .pipe(
         first(),
-        mergeMap((messages) => zip(interval(500), from(messages)))
+        tap(() => (this.botIsTyping = true)),
+        mergeMap((messages) => zip(interval(500), from(messages))),
+        finalize(() => (this.botIsTyping = false))
       )
       .subscribe(([_, message]) => {
         const messages = [...this.messages$.getValue(), message];
@@ -38,7 +49,7 @@ export class ChatComponent implements OnInit {
   }
 
   sendMessage() {
-    if (this.messageForm.valid) {
+    if (this.messageForm.valid && !this.botIsTyping) {
       const message: ChatMessage = {
         text: this.messageForm.get('message').value,
         type: 'text',
@@ -48,20 +59,24 @@ export class ChatComponent implements OnInit {
       const messages = [...this.messages$.getValue(), message];
       this.messages$.next(messages);
 
+      this.messageForm.reset();
+
       this.scrollBottom();
 
       this.chatService
         .sendMessage(message)
         .pipe(
           first(),
-          mergeMap((botMessages) => zip(interval(500), from(botMessages)))
+          tap(() => (this.botIsTyping = true)),
+          mergeMap((botMessages) => zip(interval(500), from(botMessages))),
+          finalize(() => (this.botIsTyping = false))
         )
         .subscribe(([_, botMessage]) => {
           const messages = [...this.messages$.getValue(), botMessage];
 
           this.messages$.next(messages);
 
-          this.messageForm.reset();
+          this.messageForm.enable();
 
           this.scrollBottom();
         });
@@ -76,6 +91,6 @@ export class ChatComponent implements OnInit {
         top: this.chat.nativeElement.scrollHeight,
         behavior: 'smooth',
       });
-    }, 100);
+    }, 300);
   }
 }
