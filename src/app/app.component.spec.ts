@@ -23,7 +23,7 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it('should redirect login page on logout', () => {
+  it('should redirect to login page on logout', () => {
     const appComponent: AppComponent = TestBed.createComponent(AppComponent)
       .componentInstance;
 

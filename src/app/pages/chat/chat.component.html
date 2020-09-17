@@ -1,19 +1,35 @@
 <h1>Chat</h1>
 
-<ul *ngIf="messages$ | async as messages">
-  <li *ngFor="let message of messages">
-    <span *ngIf="message.type === 'text'">{{ message.text }}</span>
-    <img *ngIf="message.type === 'image'" [src]="message.url" alt="Cute Cat" />
-  </li>
-</ul>
+<div class="chatbot__overview">
+  <ul #chat class="chatlist" *ngIf="messages$ | async as messages">
+    <li
+      *ngFor="let message of messages"
+      [ngClass]="{
+        'bot__output play-animation': !message.own,
+        user__input: message.own,
+        text: message.type === 'text',
+        image: message.type === 'image'
+      }"
+    >
+      <ng-container *ngIf="message.type === 'text'; else imgMessage">
+        {{ message.text }}
+      </ng-container>
 
-<form [formGroup]="messageForm" (submit)="sendMessage()">
-  <input
-    id="message"
-    placeholder="Type here..."
-    type="text"
-    formControlName="message"
-  />
+      <ng-template #imgMessage>
+        <img [src]="message.url" alt="Cute Cat" />
+      </ng-template>
+    </li>
+  </ul>
 
-  <input type="submit" value="Send" />
-</form>
+  <div class="chatbox-area">
+    <form
+      [formGroup]="messageForm"
+      class="chatbox-form"
+      (submit)="sendMessage()"
+    >
+      <input type="text" placeholder="Type here..." formControlName="message" />
+
+      <input type="submit" value="send" />
+    </form>
+  </div>
+</div>

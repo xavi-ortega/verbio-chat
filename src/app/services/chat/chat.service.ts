@@ -9,7 +9,7 @@ const GET_WELCOME_MESSAGE_URL = 'getWelcomeMessage';
 const POST_MESSAGE_URL = 'sendMessage';
 
 export interface ChatMessage {
-  text: string;
+  text?: string;
   type: string;
   url?: string;
   own?: boolean;
