@@ -2,8 +2,6 @@ $primary: #ff1f58;
 $secondary: #0cddb8;
 $bot-output-delay: 500ms;
 
-@import url("https://fonts.googleapis.com/css?family=Montserrat|Roboto");
-
 *,
 *:before,
 *:after {
@@ -28,6 +26,14 @@ $bot-output-delay: 500ms;
   margin: 3rem auto 0 auto;
 
   padding: 3em;
+}
+
+@media only screen and (max-width: 600px) {
+  .chatbot__overview {
+    margin: 1rem 15px 1rem 15px;
+    width: auto;
+    font-size: 12px;
+  }
 }
 
 .chatlist {

@@ -1,7 +1,6 @@
 header {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  justify-content: center;
 
   .logo {
     margin: 2rem 0;
@@ -27,6 +26,21 @@ header {
 
     &:hover {
       opacity: 1;
+    }
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  header {
+    justify-content: space-around;
+
+    .logo {
+      margin: 1rem 0;
+    }
+
+    .logout {
+      margin: 1rem 0;
+      position: relative;
     }
   }
 }

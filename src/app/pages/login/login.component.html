@@ -1,15 +1,25 @@
 <section>
-  <form [formGroup]="loginForm" (submit)="login()">
-    <fieldset>
-      <label for="user">User</label>
-      <input id="user" type="text" formControlName="user" />
-    </fieldset>
+  <img
+    class="logo"
+    src="https://www.verbio.com/wp-content/themes/verbio-theme/dist/images/logo.svg"
+    alt="Verbio Technologies"
+  />
 
-    <fieldset>
-      <label for="password">Password</label>
-      <input id="password" type="password" formControlName="password" />
-    </fieldset>
+  <h3>Welcome back!</h3>
 
-    <input type="submit" value="Login" />
-  </form>
+  <div class="wrapper">
+    <form [formGroup]="loginForm" (submit)="login()">
+      <div class="field">
+        <label for="user">User</label>
+        <input id="user" type="text" formControlName="user" />
+      </div>
+
+      <div class="field">
+        <label for="password">Password</label>
+        <input id="password" type="password" formControlName="password" />
+      </div>
+
+      <input type="submit" value="Login" />
+    </form>
+  </div>
 </section>
