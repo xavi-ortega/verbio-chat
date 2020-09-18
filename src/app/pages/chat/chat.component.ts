@@ -63,11 +63,12 @@ export class ChatComponent implements OnInit {
 
       this.scrollBottom();
 
+      this.botIsTyping = true;
+
       this.chatService
         .sendMessage(message)
         .pipe(
           first(),
-          tap(() => (this.botIsTyping = true)),
           mergeMap((botMessages) => zip(interval(500), from(botMessages))),
           finalize(() => (this.botIsTyping = false))
         )

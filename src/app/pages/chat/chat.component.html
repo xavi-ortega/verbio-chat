@@ -20,10 +20,12 @@
   </ul>
 
   <div class="chatbox-area">
-    <div *ngIf="botIsTyping" class="typing-indicator">
-      <span></span>
-      <span></span>
-      <span></span>
+    <div class="typing-wrapper">
+      <div *ngIf="botIsTyping" class="typing-indicator">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
     </div>
 
     <form

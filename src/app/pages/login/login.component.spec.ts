@@ -5,7 +5,9 @@ import {
 } from '@angular/common/http/testing';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Router } from '@angular/router';
+import { ToastrModule } from 'ngx-toastr';
 import { of } from 'rxjs';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { environment } from 'src/environments/environment';
@@ -23,7 +25,12 @@ describe('LoginComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [LoginComponent],
-      imports: [HttpClientTestingModule, ReactiveFormsModule],
+      imports: [
+        HttpClientTestingModule,
+        ReactiveFormsModule,
+        BrowserAnimationsModule,
+        ToastrModule.forRoot(),
+      ],
       providers: [{ provide: Router, useValue: routerMock }],
     }).compileComponents();
   }));

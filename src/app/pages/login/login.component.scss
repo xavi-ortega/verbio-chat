@@ -2,28 +2,26 @@ $primary: #ff1f58;
 $secondary: #0cddb8;
 
 .logo {
-  margin: 2rem 0;
 }
 
 h3 {
   font-family: "Sailec-Medium", sans-serif;
   font-size: 2rem;
   color: white;
-  margin: 2rem 0;
 }
 
 section {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
   width: 100%;
+  height: 100vh;
 }
 
 .wrapper {
   background-color: #f9f9f9;
   width: 300px;
-  margin: auto;
   padding: 3rem 5rem;
   margin-left: 15px;
   margin-right: 15px;
@@ -51,6 +49,21 @@ section {
     font-size: 14px;
     display: block;
     width: 100%;
+  }
+
+  &.has-error {
+    label,
+    p {
+      color: $primary;
+    }
+
+    input {
+      border-color: $primary;
+    }
+
+    p {
+      font-size: 12px;
+    }
   }
 }
 

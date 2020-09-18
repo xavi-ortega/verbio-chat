@@ -9,14 +9,25 @@
 
   <div class="wrapper">
     <form [formGroup]="loginForm" (submit)="login()">
-      <div class="field">
+      <div class="field" [ngClass]="{ 'has-error': controlHasError('user') }">
         <label for="user">User</label>
         <input id="user" type="text" formControlName="user" />
+
+        <p *ngIf="controlHasError('user', 'required')">
+          This field is required
+        </p>
       </div>
 
-      <div class="field">
+      <div
+        class="field"
+        [ngClass]="{ 'has-error': controlHasError('password') }"
+      >
         <label for="password">Password</label>
         <input id="password" type="password" formControlName="password" />
+
+        <p *ngIf="controlHasError('password', 'required')">
+          This field is required
+        </p>
       </div>
 
       <input type="submit" value="Login" />

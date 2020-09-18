@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { first } from 'rxjs/operators';
 import { AuthService } from './services/auth/auth.service';
 
@@ -11,7 +12,11 @@ import { AuthService } from './services/auth/auth.service';
 export class AppComponent {
   hasAuth: boolean = false;
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private toastrService: ToastrService,
+    private router: Router
+  ) {}
 
   checkAuth() {
     this.hasAuth = this.authService.check();
@@ -23,6 +28,7 @@ export class AppComponent {
       .pipe(first())
       .subscribe((success) => {
         if (success) {
+          this.toastrService.success('See you soon!');
           this.router.navigate(['/login']);
         }
       });

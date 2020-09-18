@@ -47,6 +47,8 @@ $bot-output-delay: 500ms;
 
   overflow-x: hidden;
 
+  padding: 0;
+
   .user__input,
   .bot__output {
     padding: 0.85em;
@@ -137,7 +139,6 @@ $bot-output-delay: 500ms;
   bottom: 0;
   height: auto;
   width: 100%;
-  margin-top: 2rem;
 }
 
 input {
@@ -186,27 +187,8 @@ input[type="submit"] {
   }
 }
 
-::-webkit-input-placeholder {
-  /* WebKit, Blink, Edge */
-  color: #fff;
-}
-
-::-moz-placeholder {
-  /* Mozilla Firefox 19+ */
-  color: #fff;
-  opacity: 1;
-}
-
-::-webkit-scrollbar {
-  width: 0.65em; /* for vertical scrollbars */
-}
-
-::-webkit-scrollbar-track {
-  background: rgba(0, 0, 0, 0.1);
-}
-
-::-webkit-scrollbar-thumb {
-  background: rgba(0, 0, 0, 0.3);
+.typing-wrapper {
+  min-height: 40px;
 }
 
 .typing-indicator {
@@ -240,4 +222,27 @@ input[type="submit"] {
   50% {
     opacity: 1;
   }
+}
+
+::-webkit-input-placeholder {
+  /* WebKit, Blink, Edge */
+  color: #fff;
+}
+
+::-moz-placeholder {
+  /* Mozilla Firefox 19+ */
+  color: #fff;
+  opacity: 1;
+}
+
+::-webkit-scrollbar {
+  width: 0.65em; /* for vertical scrollbars */
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.3);
 }
