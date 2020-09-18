@@ -26,6 +26,23 @@ $bot-output-delay: 500ms;
   margin: 3rem auto 0 auto;
 
   padding: 3em;
+
+  animation-name: openChat;
+  animation-duration: 750ms;
+  animation-iteration-count: 1;
+  animation-play-state: running;
+  animation-fill-mode: forwards;
+}
+
+@keyframes openChat {
+  0% {
+    opacity: 0;
+    height: 25vh;
+  }
+
+  100% {
+    height: 75vh;
+  }
 }
 
 @media only screen and (max-width: 600px) {
@@ -210,6 +227,7 @@ input[type="submit"] {
     display: block;
     border-radius: 50%;
     opacity: 0.4;
+
     @for $i from 1 through 3 {
       &:nth-of-type(#{$i}) {
         animation: 1s blink infinite ($i * 0.3333s);

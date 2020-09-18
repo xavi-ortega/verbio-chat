@@ -35,6 +35,12 @@ describe('ChatComponent', () => {
     fixture = TestBed.createComponent(ChatComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+
+    httpMock
+      .expectOne(`${environment.serverUrl}/getWelcomeMessage`)
+      .flush({ response: [] });
+
+    component.botIsTyping = false;
   });
 
   it('should create', () => {
@@ -107,10 +113,6 @@ describe('ChatComponent', () => {
   });
 
   afterEach(() => {
-    httpMock
-      .expectOne(`${environment.serverUrl}/getWelcomeMessage`)
-      .flush({ response: [] });
-
     httpMock.verify();
   });
 });

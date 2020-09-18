@@ -1,3 +1,10 @@
+import {
+  animate,
+  state,
+  style,
+  transition,
+  trigger,
+} from '@angular/animations';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { BehaviorSubject, from, interval, Observable, zip } from 'rxjs';
@@ -34,11 +41,13 @@ export class ChatComponent implements OnInit {
       message: new FormControl('', Validators.required),
     });
 
+    this.botIsTyping = true;
+
     this.chatService
       .fetchWelcomeMessage()
       .pipe(
         first(),
-        tap(() => (this.botIsTyping = true)),
+        delay(500),
         mergeMap((messages) => zip(interval(500), from(messages))),
         finalize(() => (this.botIsTyping = false))
       )
