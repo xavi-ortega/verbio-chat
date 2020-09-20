@@ -1,0 +1,26 @@
+$primary: #ff1f58;
+
+.wrapper {
+  height: 100vh;
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+h3 {
+  font-family: "Sailec-Medium", sans-serif;
+  font-size: 2rem;
+  color: white;
+}
+
+p {
+  font-family: "Sailec-Medium", sans-serif;
+  color: white;
+}
+
+a {
+  color: $primary;
+}
