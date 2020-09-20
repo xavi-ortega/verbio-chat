@@ -23,6 +23,14 @@ ng build --prod
 
 The build artifacts will be stored in the `dist/` directory.
 
+You can test it with lite-server when the project has been built:
+
+```bash
+lite-server --baseDir="dist/verbio-chat"
+```
+
+Or you can just deploy it.
+
 ## Configuration
 
 You can configure this project by change the environment variables at `src/environment` files (there is development and production environment).
